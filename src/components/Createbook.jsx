@@ -93,54 +93,67 @@ function Createbook() {
       </div>
 
       <div className="ml-4 mr-4">
-        <table className="table-auto w-full border-collapse border border-b-red-950 bg-white text-black">
-          <thead className="bg-amber-50">
-            <tr>
-              <th className="border bg-[#FFFBEB] px-4 py-2">Book Name</th>
-              <th className="border bg-[#FFFBEB] px-4 py-2">Author Name</th>
-              <th className="border bg-[#FFFBEB] px-4 py-2">Price</th>
-              <th className="border bg-[#FFFBEB] px-4 py-2">Genre</th>
-              <th className="border bg-[#FFFBEB] px-4 py-2">Link</th>
-              <th className="border bg-[#FFFBEB] px-4 py-2">D/E</th>
-            </tr>
-          </thead>
-          <tbody>
-            {showData.map((item) => (
-              <tr key={item._id} className="text-center">
-                {editId === item._id ? (
-                  <>
-                    <td><input name="bookName" value={edit.name} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
-                    <td><input name="author" value={edit.author} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
-                    <td><input name="Price" value={edit.price} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
-                    <td><input name="genre" value={edit.genre} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
-                    <td><input name="link" value={edit.link} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
-                    <td>
-                      <button onClick={() => handleUpdateSave(item._id)}>✅</button>
-                      <button onClick={() => setEditId(null)}>❌</button>
-                    </td>
-                  </>
-                ) : (
-                  <>
-                    <td className='border border-y-amber-950 w-46 bg-[#EDE0D4] p-1'>{item.name}</td>
-                    <td className='border border-y-amber-950 w-46 bg-[#EDE0D4] p-1'>{item.author}</td>
-                    <td className='border border-y-amber-950 w-46 bg-[#EDE0D4] p-1'>{item.price}</td>
-                    <td className='border border-y-amber-950 w-46 bg-[#EDE0D4] p-1'>{item.genre}</td>
-                    <td className='border border-y-amber-950 w-46 bg-[#EDE0D4] p-1'><a href={item.link} target="_blank" rel="noreferrer">{item.link}</a></td>
-                    <td className='border border-y-amber-950 w-46 bg-[#EDE0D4] p-1'>
-                      <button onClick={() => dispatch(deleteBookk(item._id))}>🗑️</button>
-                      <button onClick={() => handleEdit(item)}>📝</button>
-                    </td>
-                  </>
-                )}
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+  <table className="table-auto w-full border border-[#A1887F] shadow-lg bg-[#FFF8E7] text-[#4E342E]">
+    <thead className="bg-[#6D4C41] text-white ">
+      <tr>
+        <th className="px-4 py-2 w-40">📘 Book Name</th>
+        <th className="px-4 py-2 w-40">✍️ Author</th>
+        <th className="px-4 py-2 w-40">💰 Price</th>
+        <th className="px-4 py-2 w-40">📖 Genre</th>
+        <th className="px-4 py-2 w-40">🔗 Link</th>
+        <th className="px-4 py-2 w-40">⚙️ Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {showData.map((item, index) => (
+        <tr
+          key={item._id}
+          className={`text-center ${
+            index % 2 === 0 ? 'bg-[#F5EBDD]' : 'bg-[#EDE0D4]'
+          } hover:bg-[#E0C9B2] transition-colors duration-200`}
+        >
+          {editId === item._id ? (
+            <>
+              <td><input name="bookName" value={edit.name} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
+              <td><input name="author" value={edit.author} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
+              <td><input name="Price" value={edit.price} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
+              <td><input name="genre" value={edit.genre} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
+              <td><input name="link" value={edit.link} onChange={handleEditChange} className="w-full border px-2 py-1" /></td>
+              <td>
+                <button onClick={() => handleUpdateSave(item._id)} className="text-green-600 hover:text-green-800">✅</button>
+                <button onClick={() => setEditId(null)} className="text-red-600 hover:text-red-800">❌</button>
+              </td>
+            </>
+          ) : (
+            <>
+              <td className="p-2">{item.name}</td>
+              <td className="p-2">{item.author}</td>
+              <td className="p-2">${item.price}</td>
+              <td className="p-2">{item.genre}</td>
+              <td className="p-2"><a href={item.link} target="_blank" rel="noreferrer" className="text-blue-700 hover:underline">{item.link}</a></td>
+              <td className="p-2 space-x-2">
+                <button
+                  onClick={() => dispatch(deleteBookk(item._id))}
+                  className="hover:text-red-600"
+                  title="Delete"
+                >🗑️</button>
+                <button
+                  onClick={() => handleEdit(item)}
+                  className="hover:text-yellow-700"
+                  title="Edit"
+                >📝</button>
+              </td>
+            </>
+          )}
+        </tr>
+      ))}
+    </tbody>
+  </table>
+</div>
 
-      <Footer />
-    </>
-  );
-}
+<Footer />
+</>
+  )
+};
 
 export default Createbook;

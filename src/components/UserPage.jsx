@@ -55,9 +55,11 @@ const navigate=useNavigate();
         <button className="border border-black p-1 rounded-lg bg-amber-50 hover:bg-[#6D4C41] hover:text-amber-50 hover:border-amber-50" onClick={handleBackLanding}>Landing Page</button>
       </div>
       {likedBooks.map((book) => (
-        <div key={book._id} className="bg-white shadow-md p-3 rounded mb-2">
-          <h3 className="text-xl">{book.name}</h3>
+        <div key={book._id} className="bg-amber-50 mt-4 pl-4 shadow-md p-3 rounded mb-2">
+          <h3 className="text-xl underline">{book.name}</h3>
           <p className="text-gray-600">{book.author}</p>
+          <a href={book.link}    target="_blank" 
+        rel="noopener noreferrer"  className="text-gray-600">📖 Read this Book</a>
         </div>
       ))}
     </div>
